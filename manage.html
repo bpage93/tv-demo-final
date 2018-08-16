@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TV Demo HTML</title>
+    <link rel="stylesheet" type="text/css" href="./shared.css" />
+</head>
+
+<body>
+    <script>
+        const clickedSubmit = () => {
+            console.log('Clicked submit')
+        }
+        const clickedPizzaCat = () => {
+            console.log('Clicked pizza cat')
+        }
+        const clickedFunnyBunny = () => {
+            console.log('Clicked funny bunny')
+        }
+        const clickedDeletePizzaCat = () => {
+            console.log('Clicked delete pizza cat')
+        }
+        const clickedDeleteFunnyBunny = () => {
+            console.log('Clicked delete funny bunny')
+        }
+    </script>
+    <div id="all-div">
+        <nav>
+            <a href="./manage.html">Manage</a>
+            <div id="nav-border">&nbsp;</div>
+            <a href="./preview.html">Preview</a>
+        </nav>
+        <main>
+            <section>
+                <h2>Shows</h2>
+                <div>
+                    <button onclick="clickedPizzaCat()">Pizza Cat</button>
+                    <button onclick="clickedDeletePizzaCat()">-</button>
+                </div>
+                <div>
+                    <button onclick="clickedFunnyBunny()">Funny Bunny</button>
+                    <button onclick="clickedDeleteFunnyBunny()">-</button>
+                </div>
+            </section>
+            <section>
+                <h2>New/Edit</h2>
+                <form>
+                    <div>
+                        <label for="name">Name:</label>
+                        <input id="name" type="text" value="Pizza Cat" />
+                    </div>
+                    <div>
+                        <label for="rating">Rating:</label>
+                        <input id="rating" type="text" value="1" />
+                    </div>
+                    <div>
+                        <label for="image-url">Image Url:</label>
+                        <input id="image-url" type="text" value="https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg" />
+                    </div>
+                </form>
+                <button onclick="clickedSubmit()">Submit</button>
+            </section>
+        </main>
+        <footer>
+            &copy; copyright 2018 Danny Warren
+        </footer>
+    </div>
+</body>
+
+</html>

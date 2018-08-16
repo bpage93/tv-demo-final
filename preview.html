@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TV Demo HTML</title>
+    <link rel="stylesheet" type="text/css" href="./shared.css" />
+</head>
+
+<body>
+    <script>
+        const clickedPizzaCat = () => {
+            console.log('Clicked Pizza Cat')
+        }
+        const clickedFunnyBunny = () => {
+            console.log('Clicked Funny Bunny')
+        }
+    </script>
+    <nav>
+        <a href="./manage.html">Manage</a>
+        <div id="nav-border">&nbsp;</div>
+        <a href="./preview.html">Preview</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Shows</h2>
+            <button onclick="clickedPizzaCat()">Pizza Cat</button>
+            <button onclick="clickedFunnyBunny()">Funny Bunny</button>
+        </section>
+        <section>
+            <div>
+                <h2>Pizza Cat</h2>
+                <h2>1</h2>
+            </div>
+            <img src="https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg" />
+        </section>
+    </main>
+    <footer>
+        &copy; copyright 2018 Danny Warren
+    </footer>
+</body>
+
+</html>
