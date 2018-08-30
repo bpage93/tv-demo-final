@@ -1,37 +1,44 @@
 import React, { Component } from 'react'
+import Show from './Show'
 
 class ManagePage extends Component {
+    showSelected = () => {
+        console.log('showSelected')
+    }
+
+    showDeleted = () => {
+        console.log('showDeleted')
+    }
+
+    saveShow = () => {
+        console.log('saveShow')
+    }
+
     render() {
         return (
             <main>
                 <section>
                     <h2>Shows</h2>
-                    <div>
-                        <button onClick="clickedPizzaCat()">Pizza Cat</button>
-                        <button onClick="clickedDeletePizzaCat()">-</button>
-                    </div>
-                    <div>
-                        <button onClick="clickedFunnyBunny()">Funny Bunny</button>
-                        <button onClick="clickedDeleteFunnyBunny()">-</button>
-                    </div>
+                    <Show name="Pizza Cat" allowDelete={true} selectHandler={this.showSelected} deleteHandler={this.showDeleted} />
+                    <Show name="Funny Bunny" allowDelete={true} selectHandler={this.showSelected} deleteHandler={this.showDeleted} />
                 </section>
                 <section>
                     <h2>New/Edit</h2>
                     <form>
                         <div>
-                            <label for="name">Name:</label>
+                            <label htmlFor="name">Name:</label>
                             <input id="name" type="text" value="Pizza Cat" />
                         </div>
                         <div>
-                            <label for="rating">Rating:</label>
+                            <label htmlFor="rating">Rating:</label>
                             <input id="rating" type="text" value="1" />
                         </div>
                         <div>
-                            <label for="image-url">Image Url:</label>
+                            <label htmlFor="image-url">Image Url:</label>
                             <input id="image-url" type="text" value="https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg" />
                         </div>
                     </form>
-                    <button onClick={this.clickedSubmit}>Submit</button>
+                    <button onClick={this.saveShow}>Submit</button>
                 </section>
             </main>
         )

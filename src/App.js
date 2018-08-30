@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import SiteNav from './SiteNav'
 import ManagePage from './ManagePage'
@@ -9,13 +9,13 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <fragment>
+        <Fragment>
           <SiteNav />
           <Switch>
             <Route exact path="/" component={ManagePage} />
             <Route path="/preview" component={PreviewPage} />
           </Switch>
-        </fragment>
+        </Fragment>
       </Router>
     )
   }
