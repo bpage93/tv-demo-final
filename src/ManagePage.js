@@ -4,8 +4,12 @@ import Show from './Show'
 class ManagePage extends Component {
     state = {
         nameInProgress: '',
+        ratingInProgress: '',
+        imageUrlInProgress: 'https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg',
         show: {
-            name: ''
+            name: '',
+            rating: '',
+            imageUrl: '',
         }
     }
 
@@ -15,16 +19,32 @@ class ManagePage extends Component {
         })
     }
 
+    handleRatingChange = (event) => {
+        this.setState({
+            ratingInProgress: event.target.value
+        })
+    }
+
+    handleImageUrlChange = (event) => {
+        this.setState({
+            imageUrlInProgress: event.target.value
+        })
+    }
+
     showSelected = () => {
         this.setState({
-            nameInProgress: this.state.show.name
+            nameInProgress: this.state.show.name,
+            ratingInProgress: this.state.show.rating,
+            imageUrlInProgress: this.state.show.imageUrl
         })
     }
 
     showDeleted = () => {
         this.setState({
             show: {
-                name: ''
+                name: '',
+                rating: '',
+                imageUrl: ''
             }
         })
     }
@@ -32,8 +52,12 @@ class ManagePage extends Component {
     saveShow = () => {
         this.setState({
             nameInProgress: '',
+            ratingInProgress: '',
+            imageUrlInProgress: '',
             show: {
-                name: this.state.nameInProgress
+                name: this.state.nameInProgress,
+                rating: this.state.ratingInProgress,
+                imageUrl: this.state.imageUrlInProgress
             }
         })
     }
@@ -60,11 +84,11 @@ class ManagePage extends Component {
                         </div>
                         <div>
                             <label htmlFor="rating">Rating:</label>
-                            <input id="rating" type="text" value="1" />
+                            <input id="rating" type="text" value={this.state.ratingInProgress} onChange={this.handleRatingChange} />
                         </div>
                         <div>
                             <label htmlFor="image-url">Image Url:</label>
-                            <input id="image-url" type="text" value="https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg" />
+                            <input id="image-url" type="text" value={this.state.imageUrlInProgress} onChange={this.handleImageUrlChange} />
                         </div>
                     </form>
                     <button onClick={this.saveShow}>Submit</button>
