@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class Show extends Component {
     renderDelete = () => {
-        if (this.props.allowDelete)
+        if (this.props.allowDelete === true)
             return (<button onClick={this.props.deleteHandler}>-</button>)
     }
 

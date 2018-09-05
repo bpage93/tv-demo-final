@@ -1,17 +1,47 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Show from './Show'
 
 class ManagePage extends Component {
+    state = {
+        nameInProgress: '',
+        show: {
+            name: ''
+        }
+    }
+
+    handleNameChange = (event) => {
+        this.setState({
+            nameInProgress: event.target.value
+        })
+    }
+
     showSelected = () => {
-        console.log('showSelected')
+        this.setState({
+            nameInProgress: this.state.show.name
+        })
     }
 
     showDeleted = () => {
-        console.log('showDeleted')
+        this.setState({
+            show: {
+                name: ''
+            }
+        })
     }
 
     saveShow = () => {
-        console.log('saveShow')
+        this.setState({
+            nameInProgress: '',
+            show: {
+                name: this.state.nameInProgress
+            }
+        })
+    }
+
+    renderShows = () => {
+        return (
+            <Show name={this.state.show.name} allowDelete={true} selectHandler={this.showSelected} deleteHandler={this.showDeleted} />
+        )
     }
 
     render() {
@@ -19,15 +49,14 @@ class ManagePage extends Component {
             <main>
                 <section>
                     <h2>Shows</h2>
-                    <Show name="Pizza Cat" allowDelete={true} selectHandler={this.showSelected} deleteHandler={this.showDeleted} />
-                    <Show name="Funny Bunny" allowDelete={true} selectHandler={this.showSelected} deleteHandler={this.showDeleted} />
+                    {this.renderShows()}
                 </section>
                 <section>
                     <h2>New/Edit</h2>
                     <form>
                         <div>
                             <label htmlFor="name">Name:</label>
-                            <input id="name" type="text" value="Pizza Cat" />
+                            <input id="name" type="text" value={this.state.nameInProgress} onChange={this.handleNameChange} />
                         </div>
                         <div>
                             <label htmlFor="rating">Rating:</label>
