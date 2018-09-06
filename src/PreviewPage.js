@@ -1,13 +1,34 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Show from './Show'
 
 class PreviewPage extends Component {
-    showSelected = () => {
-        console.log('showSelected')
+    static propTypes = {
+        show: PropTypes.object.isRequired
     }
 
-    showDeleted = () => {
-        console.log('showDeleted')
+    state ={
+        selectedShow: {
+            name: '',
+            rating: '',
+            imageUrl: ''
+        }
+    }
+
+    showSelected = () => {
+        this.setState({
+            selectedShow: {
+                name: this.props.show.name,
+                rating: this.props.show.rating,
+                imageUrl: this.props.show.imageUrl
+            }
+        })
+    }
+
+    renderShows = () => {
+        return (
+            <Show name={this.props.show.name} selectHandler={this.showSelected} />
+        )
     }
 
     render() {
@@ -15,15 +36,14 @@ class PreviewPage extends Component {
             <main>
                 <section>
                     <h2>Shows</h2>
-                    <Show name="Pizza Cat" selectHandler={this.showSelected} deleteHander={this.showDeleted}/>
-                    <Show name="Funny Bunny" selectHandler={this.showSelected} deleteHander={this.showDeleted}/>
+                    {this.renderShows()}
                 </section>
                 <section>
                     <div>
-                        <h2>Pizza Cat</h2>
-                        <h2>1</h2>
+                        <h2>{this.state.selectedShow.name}</h2>
+                        <h2>Rating: {this.state.selectedShow.rating}</h2>
                     </div>
-                    <img src="https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg" alt="pizza cat" />
+                    <img src={this.state.selectedShow.imageUrl} alt="The show's preview image." />
                 </section>
             </main>
         )

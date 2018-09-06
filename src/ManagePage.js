@@ -1,16 +1,18 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Show from './Show'
 
 class ManagePage extends Component {
+    static propTypes = {
+        show: PropTypes.object.isRequired,
+        showDeleted: PropTypes.func.isRequired,
+        saveShow: PropTypes.func.isRequireds
+    }
+
     state = {
         nameInProgress: '',
         ratingInProgress: '',
-        imageUrlInProgress: 'https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg',
-        show: {
-            name: '',
-            rating: '',
-            imageUrl: '',
-        }
+        imageUrlInProgress: 'https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg'
     }
 
     handleNameChange = (event) => {
@@ -33,38 +35,33 @@ class ManagePage extends Component {
 
     showSelected = () => {
         this.setState({
-            nameInProgress: this.state.show.name,
-            ratingInProgress: this.state.show.rating,
-            imageUrlInProgress: this.state.show.imageUrl
+            nameInProgress: this.props.show.name,
+            ratingInProgress: this.props.show.rating,
+            imageUrlInProgress: this.props.show.imageUrl
         })
     }
 
     showDeleted = () => {
-        this.setState({
-            show: {
-                name: '',
-                rating: '',
-                imageUrl: ''
-            }
-        })
+        this.props.showDeleted()
     }
 
     saveShow = () => {
         this.setState({
             nameInProgress: '',
             ratingInProgress: '',
-            imageUrlInProgress: '',
-            show: {
-                name: this.state.nameInProgress,
-                rating: this.state.ratingInProgress,
-                imageUrl: this.state.imageUrlInProgress
-            }
+            imageUrlInProgress: ''
+        })
+
+        this.props.saveShow({
+            name: this.state.nameInProgress,
+            rating: this.state.ratingInProgress,
+            imageUrl: this.state.imageUrlInProgress
         })
     }
 
     renderShows = () => {
         return (
-            <Show name={this.state.show.name} allowDelete={true} selectHandler={this.showSelected} deleteHandler={this.showDeleted} />
+            <Show name={this.props.show.name} allowDelete={true} selectHandler={this.showSelected} deleteHandler={this.showDeleted} />
         )
     }
 
