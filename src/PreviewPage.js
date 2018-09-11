@@ -7,7 +7,7 @@ class PreviewPage extends Component {
         show: PropTypes.object.isRequired
     }
 
-    state ={
+    state = {
         selectedShow: {
             name: '',
             rating: '',
@@ -43,7 +43,7 @@ class PreviewPage extends Component {
                         <h2>{this.state.selectedShow.name}</h2>
                         <h2>Rating: {this.state.selectedShow.rating}</h2>
                     </div>
-                    <img src={this.state.selectedShow.imageUrl} alt="The show's preview image." />
+                    <img src={this.state.selectedShow.imageUrl} alt="Preview of show" />
                 </section>
             </main>
         )
