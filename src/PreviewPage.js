@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Show from './Show'
+import TVShow from './TVShow'
 
 class PreviewPage extends Component {
     static propTypes = {
-        show: PropTypes.object.isRequired
+        tvShow: PropTypes.object.isRequired
     }
 
     state = {
-        selectedShow: {
+        selectedTVShow: {
             name: '',
             rating: '',
             imageUrl: ''
         }
     }
 
-    showSelected = () => {
+    tvShowSelected = () => {
         this.setState({
-            selectedShow: {
-                name: this.props.show.name,
-                rating: this.props.show.rating,
-                imageUrl: this.props.show.imageUrl
+            selectedTVShow: {
+                name: this.props.tvShow.name,
+                rating: this.props.tvShow.rating,
+                imageUrl: this.props.tvShow.imageUrl
             }
         })
     }
 
-    renderShows = () => {
+    renderTVShows = () => {
         return (
-            <Show name={this.props.show.name} selectHandler={this.showSelected} />
+            <TVShow name={this.props.tvShow.name} selectHandler={this.tvShowSelected} />
         )
     }
 
@@ -36,14 +36,14 @@ class PreviewPage extends Component {
             <main>
                 <section>
                     <h2>Shows</h2>
-                    {this.renderShows()}
+                    {this.renderTVShows()}
                 </section>
                 <section>
                     <div>
-                        <h2>{this.state.selectedShow.name}</h2>
-                        <h2>Rating: {this.state.selectedShow.rating}</h2>
+                        <h2>{this.state.selectedTVShow.name}</h2>
+                        <h2>Rating: {this.state.selectedTVShow.rating}</h2>
                     </div>
-                    <img src={this.state.selectedShow.imageUrl} alt="Preview of show" />
+                    <img src={this.state.selectedTVShow.imageUrl} alt="Preview of TV Show" />
                 </section>
             </main>
         )

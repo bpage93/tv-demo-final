@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Show extends Component {
+class TVShow extends Component {
     renderDelete = () => {
         if (this.props.allowDelete === true)
             return (<button onClick={this.props.deleteHandler}>-</button>)
@@ -16,4 +16,4 @@ class Show extends Component {
     }
 }
 
-export default Show
+export default TVShow

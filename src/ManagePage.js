@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Show from './Show'
+import TVShow from './TVShow'
 
 class ManagePage extends Component {
     static propTypes = {
-        show: PropTypes.object.isRequired,
-        showDeleted: PropTypes.func.isRequired,
-        saveShow: PropTypes.func.isRequireds
+        tvShow: PropTypes.object.isRequired,
+        tvShowDeleted: PropTypes.func.isRequired,
+        saveTVShow: PropTypes.func.isRequireds
     }
 
     state = {
@@ -33,35 +33,35 @@ class ManagePage extends Component {
         })
     }
 
-    showSelected = () => {
+    tvShowSelected = () => {
         this.setState({
-            nameInProgress: this.props.show.name,
-            ratingInProgress: this.props.show.rating,
-            imageUrlInProgress: this.props.show.imageUrl
+            nameInProgress: this.props.tvShow.name,
+            ratingInProgress: this.props.tvShow.rating,
+            imageUrlInProgress: this.props.tvShow.imageUrl
         })
     }
 
-    showDeleted = () => {
-        this.props.showDeleted()
+    tvShowDeleted = () => {
+        this.props.tvShowDeleted()
     }
 
-    saveShow = () => {
+    saveTVShow = () => {
         this.setState({
             nameInProgress: '',
             ratingInProgress: '',
             imageUrlInProgress: ''
         })
 
-        this.props.saveShow({
+        this.props.saveTVShow({
             name: this.state.nameInProgress,
             rating: this.state.ratingInProgress,
             imageUrl: this.state.imageUrlInProgress
         })
     }
 
-    renderShows = () => {
+    renderTVShows = () => {
         return (
-            <Show name={this.props.show.name} allowDelete={true} selectHandler={this.showSelected} deleteHandler={this.showDeleted} />
+            <TVShow name={this.props.tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
         )
     }
 
@@ -70,7 +70,7 @@ class ManagePage extends Component {
             <main>
                 <section>
                     <h2>Shows</h2>
-                    {this.renderShows()}
+                    {this.renderTVShows()}
                 </section>
                 <section>
                     <h2>New/Edit</h2>
@@ -88,7 +88,7 @@ class ManagePage extends Component {
                             <input id="image-url" type="text" value={this.state.imageUrlInProgress} onChange={this.handleImageUrlChange} />
                         </div>
                     </form>
-                    <button onClick={this.saveShow}>Submit</button>
+                    <button onClick={this.saveTVShow}>Submit</button>
                 </section>
             </main>
         )

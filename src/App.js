@@ -7,16 +7,16 @@ import './App.css'
 
 class App extends Component {
   state = {
-    show: {
+    tvShow: {
       name: '',
       rating: '',
       imageUrl: ''
     }
   }
 
-  showDeleted = () => {
+  tvShowDeleted = () => {
     this.setState({
-      show: {
+      tvShow: {
         name: '',
         rating: '',
         imageUrl: ''
@@ -24,9 +24,9 @@ class App extends Component {
     })
   }
 
-  saveShow = (showToSave) => {
+  saveTVShow = (showToSave) => {
     this.setState({
-      show: {
+      tvShow: {
         name: showToSave.name,
         rating: showToSave.rating,
         imageUrl: showToSave.imageUrl
@@ -35,11 +35,11 @@ class App extends Component {
   }
 
   renderManagePage = () => {
-    return (<ManagePage show={this.state.show} showDeleted={this.showDeleted} saveShow={this.saveShow} />)
+    return (<ManagePage tvShow={this.state.tvShow} tvShowDeleted={this.tvShowDeleted} saveTVShow={this.saveTVShow} />)
   }
 
   renderPreviewPage = () => {
-    return (<PreviewPage show={this.state.show} />)
+    return (<PreviewPage tvShow={this.state.tvShow} />)
   }
 
   render() {
