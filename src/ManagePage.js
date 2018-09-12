@@ -4,9 +4,10 @@ import TVShow from './TVShow'
 
 class ManagePage extends Component {
     static propTypes = {
+        tvShows: PropTypes.array.isRequired,
         tvShow: PropTypes.object.isRequired,
         tvShowDeleted: PropTypes.func.isRequired,
-        saveTVShow: PropTypes.func.isRequireds
+        saveTVShow: PropTypes.func.isRequired
     }
 
     state = {
@@ -60,10 +61,44 @@ class ManagePage extends Component {
     }
 
     renderTVShows = () => {
-        return (
-            <TVShow name={this.props.tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-        )
+        const showsToRender = []
+
+        let i = 0
+        while (i < this.props.tvShows.length) {
+            console.log("We were here")
+            const tvShow = this.props.tvShows[i]
+            showsToRender.push(
+                <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
+            )
+
+            i++
+        }
+
+        return showsToRender
     }
+
+    // renderTVShows = () => {
+    //     const showsToRender = []
+    //     for (let i = 0; i < this.props.tvShows.length; i++) {
+    //         const tvShow = this.props.tvShows[i] 
+    //         showsToRender.push(
+    //             <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
+    //         )
+    //     }
+
+    //     return showsToRender
+    // }
+
+    // renderTVShows = () => {
+    //     const showsToRender = []
+    //     for (const tvShow of this.props.tvShows) {
+    //         showsToRender.push(
+    //             <TVShow key={tvShow.name} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
+    //         )
+    //     }
+
+    //     return showsToRender
+    // }
 
     render() {
         return (
