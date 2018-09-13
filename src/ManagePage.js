@@ -55,50 +55,20 @@ class ManagePage extends Component {
 
         this.props.saveTVShow({
             name: this.state.nameInProgress,
-            rating: this.state.ratingInProgress,
+            rating: Number(this.state.ratingInProgress),
             imageUrl: this.state.imageUrlInProgress
         })
     }
 
     renderTVShows = () => {
-        const showsToRender = []
-
-        let i = 0
-        while (i < this.props.tvShows.length) {
-            console.log("We were here")
-            const tvShow = this.props.tvShows[i]
-            showsToRender.push(
-                <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-            )
-
-            i++
-        }
-
-        return showsToRender
+        return this.props.tvShows.map(
+            (tvShow, i) => {
+                return (
+                    <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
+                )
+            }
+        )
     }
-
-    // renderTVShows = () => {
-    //     const showsToRender = []
-    //     for (let i = 0; i < this.props.tvShows.length; i++) {
-    //         const tvShow = this.props.tvShows[i] 
-    //         showsToRender.push(
-    //             <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-    //         )
-    //     }
-
-    //     return showsToRender
-    // }
-
-    // renderTVShows = () => {
-    //     const showsToRender = []
-    //     for (const tvShow of this.props.tvShows) {
-    //         showsToRender.push(
-    //             <TVShow key={tvShow.name} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-    //         )
-    //     }
-
-    //     return showsToRender
-    // }
 
     render() {
         return (
