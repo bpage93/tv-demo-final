@@ -26,9 +26,14 @@ class PreviewPage extends Component {
     }
 
     renderTVShows = () => {
-        return (
-            <TVShow name={this.props.tvShow.name} selectHandler={this.tvShowSelected} />
-        )
+        return this.props.tvShows.map((v, i)=>{
+
+            return <TVShow key={i} name={v.name} selectHandler={this.tvShowSelected} />
+        })
+
+        // return (
+        //     <TVShow name={this.props.tvShow.name} selectHandler={this.tvShowSelected} />
+        // )
     }
 
     render() {

@@ -13,7 +13,7 @@ class ManagePage extends Component {
     state = {
         nameInProgress: '',
         ratingInProgress: '',
-        imageUrlInProgress: 'https://caterville.files.wordpress.com/2013/10/fe0c8-pizza-cat.jpg'
+        imageUrlInProgress: ''
     }
 
     handleNameChange = (event) => {
@@ -61,20 +61,24 @@ class ManagePage extends Component {
     }
 
     renderTVShows = () => {
-        const showsToRender = []
+       return this.props.tvShows.map(( v, i)=>{
+            return <TVShow key={i} name={v.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
+        })
 
-        let i = 0
-        while (i < this.props.tvShows.length) {
-            console.log("We were here")
-            const tvShow = this.props.tvShows[i]
-            showsToRender.push(
-                <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-            )
+        // const showsToRender = []
 
-            i++
-        }
+        // let i = 0
+        // while (i < this.props.tvShows.length) {
+        //     console.log("We were here")
+        //     const tvShow = this.props.tvShows[i]
+        //     showsToRe`nder.push(
+        //         <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
+        //     )
 
-        return showsToRender
+        //     i++
+        // }
+
+        // return showsToRender
     }
 
     // renderTVShows = () => {
