@@ -11,98 +11,95 @@ class ManagePage extends Component {
     }
 
     state = {
-        nameInProgress: '',
-        ratingInProgress: '',
-        imageUrlInProgress: ''
+    data: []
     }
+componentDidMount(){
+    const  header = {
+            "Application" : "application/json",
+            "Content-Type" : "application/json"
+        }
+    
+    fetch("http://localhost:3001", header) 
+    .then(response => response.json())
+        .then((data) => {
+            this.setState ({
+                data
+            })
+            console.log (data)
+        }) 
+}
 
     handleNameChange = (event) => {
         this.setState({
-            nameInProgress: event.target.value
+            name: event.target.value
         })
     }
 
     handleRatingChange = (event) => {
         this.setState({
-            ratingInProgress: event.target.value
+            rating: event.target.value
         })
     }
 
     handleImageUrlChange = (event) => {
         this.setState({
-            imageUrlInProgress: event.target.value
+            imgUrl: event.target.value
         })
-    }
+      }
 
-    tvShowSelected = () => {
-        this.setState({
-            nameInProgress: this.props.tvShow.name,
-            ratingInProgress: this.props.tvShow.rating,
-            imageUrlInProgress: this.props.tvShow.imageUrl
-        })
-    }
+    // tvShowSelected = () => {
+    //     this.setState({
+    //         nameInProgress: this.props.tvShow.name,
+    //         ratingInProgress: this.props.tvShow.rating,
+    //         imageUrlInProgress: this.props.tvShow.imageUrl
+    //     })
+    // }
 
     tvShowDeleted = () => {
         this.props.tvShowDeleted()
     }
 
     saveTVShow = () => {
-        this.setState({
-            nameInProgress: '',
-            ratingInProgress: '',
-            imageUrlInProgress: ''
-        })
+        const body = {
+            method : "POST", 
+            body : JSON.stringify(this.state),
+            headers: {
+                "Accept" : "application/json",
+                "Content-Type" : "application/json"
+            }
+            }
+        fetch("http://localhost:3001/managePage", body) 
+        .then(response => response.json()) 
+        .then( (data) => {
+                this.setState({
+                    data
+                })
+            }
+        )
+        // this.setState({
+        //     nameInProgress: '',
+        //     ratingInProgress: '',
+        //     imageUrlInProgress: ''
+        // })
 
-        this.props.saveTVShow({
-            name: this.state.nameInProgress,
-            rating: this.state.ratingInProgress,
-            imageUrl: this.state.imageUrlInProgress
-        })
+        // this.props.saveTVShow({
+        //     name: this.state.nameInProgress,
+        //     rating: Number(this.state.ratingInProgress),
+        //     imageUrl: this.state.imageUrlInProgress
+        // })
     }
 
     renderTVShows = () => {
-       return this.props.tvShows.map(( v, i)=>{
-            return <TVShow key={i} name={v.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-        })
-
-        // const showsToRender = []
-
-        // let i = 0
-        // while (i < this.props.tvShows.length) {
-        //     console.log("We were here")
-        //     const tvShow = this.props.tvShows[i]
-        //     showsToRe`nder.push(
-        //         <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-        //     )
-
-        //     i++
-        // }
-
-        // return showsToRender
+        console.log(this.state)
+        if(this.state.data)
+        return this.state.data.map(
+            (tvShow, i) => {
+                return (
+                    <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
+                )
+            }
+        )
     }
-
-    // renderTVShows = () => {
-    //     const showsToRender = []
-    //     for (let i = 0; i < this.props.tvShows.length; i++) {
-    //         const tvShow = this.props.tvShows[i] 
-    //         showsToRender.push(
-    //             <TVShow key={i} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-    //         )
-    //     }
-
-    //     return showsToRender
-    // }
-
-    // renderTVShows = () => {
-    //     const showsToRender = []
-    //     for (const tvShow of this.props.tvShows) {
-    //         showsToRender.push(
-    //             <TVShow key={tvShow.name} name={tvShow.name} allowDelete={true} selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} />
-    //         )
-    //     }
-
-    //     return showsToRender
-    // }
 
     render() {
         return (
@@ -116,15 +113,15 @@ class ManagePage extends Component {
                     <form>
                         <div>
                             <label htmlFor="name">Name:</label>
-                            <input id="name" type="text" value={this.state.nameInProgress} onChange={this.handleNameChange} />
+                            <input id="name" type="text"  onChange={this.handleNameChange} />
                         </div>
                         <div>
                             <label htmlFor="rating">Rating:</label>
-                            <input id="rating" type="text" value={this.state.ratingInProgress} onChange={this.handleRatingChange} />
+                            <input id="rating" type="text"onChange={this.handleRatingChange} />
                         </div>
                         <div>
                             <label htmlFor="image-url">Image Url:</label>
-                            <input id="image-url" type="text" value={this.state.imageUrlInProgress} onChange={this.handleImageUrlChange} />
+                            <input id="image-url" type="text"  onChange={this.handleImageUrlChange} />
                         </div>
                     </form>
                     <button onClick={this.saveTVShow}>Submit</button>

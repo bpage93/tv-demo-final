@@ -42,7 +42,7 @@ class App extends Component {
   }
 
   renderPreviewPage = () => {
-    return (<PreviewPage tvShow={this.state.tvShow} tvShows={this.state.tvShows} />)
+    return (<PreviewPage tvShows={this.state.tvShows} tvShow={this.state.tvShow} />)
   }
 
   render() {

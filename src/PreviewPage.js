@@ -4,6 +4,7 @@ import TVShow from './TVShow'
 
 class PreviewPage extends Component {
     static propTypes = {
+        tvShows: PropTypes.array.isRequired,
         tvShow: PropTypes.object.isRequired
     }
 
@@ -26,14 +27,32 @@ class PreviewPage extends Component {
     }
 
     renderTVShows = () => {
-        return this.props.tvShows.map((v, i)=>{
-
-            return <TVShow key={i} name={v.name} selectHandler={this.tvShowSelected} />
+        const filteredTVShows = this.props.tvShows.filter(
+            (tvShow) => {
+                return tvShow.rating < 5
+            }
+        )
+        return filteredTVShows.map((tvShow, i) => {
+            return (
+                <TVShow key={i} name={tvShow.name} selectHandler={this.tvShowSelected} />
+            )
         })
+    }
 
-        // return (
-        //     <TVShow name={this.props.tvShow.name} selectHandler={this.tvShowSelected} />
-        // )
+    calculateAvgRating = () => {
+        if (this.props.tvShows.length < 1){
+            return 0
+        } else if (this.props.tvShows.length === 1) {
+            return this.props.tvShows[0].rating
+        }
+
+        const sumOfRatings = this.props.tvShows.reduce(
+            (prevValue, currentValue) => {
+                return (prevValue.rating || prevValue) + currentValue.rating
+            }
+        )
+        const avgRating = sumOfRatings / this.props.tvShows.length
+        return Math.round(avgRating * 10) /10
     }
 
     render() {
@@ -41,6 +60,7 @@ class PreviewPage extends Component {
             <main>
                 <section>
                     <h2>Shows</h2>
+                    <h3>Avg Rating: {this.calculateAvgRating()}</h3>
                     {this.renderTVShows()}
                 </section>
                 <section>
